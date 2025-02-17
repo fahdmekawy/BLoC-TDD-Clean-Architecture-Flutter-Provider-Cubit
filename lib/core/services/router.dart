@@ -1,5 +1,5 @@
 import 'package:education_app_tutorial/core/common/views/page_under_construction.dart';
-import 'package:education_app_tutorial/src/onboarding/presentation/onboarding_screen.dart';
+import 'package:education_app_tutorial/src/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

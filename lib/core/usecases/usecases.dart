@@ -1,7 +1,7 @@
 import 'package:education_app_tutorial/core/utils/typedefs.dart';
 
-abstract class UseaseWithParams<Type, Params> {
-  const UseaseWithParams();
+abstract class UsecaseWithParams<Type, Params> {
+  const UsecaseWithParams();
 
   ResultFuture<Type> call(Params params);
 }

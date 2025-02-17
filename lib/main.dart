@@ -1,7 +1,6 @@
 import 'package:education_app_tutorial/core/res/colors.dart';
 import 'package:education_app_tutorial/core/res/fonts.dart';
 import 'package:education_app_tutorial/core/services/router.dart';
-import 'package:education_app_tutorial/src/onboarding/presentation/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: Fonts.poppins,
+        fontFamily: AppFonts.poppins,
         appBarTheme: const AppBarTheme(color: Colors.transparent),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: AppColors.primaryColor,

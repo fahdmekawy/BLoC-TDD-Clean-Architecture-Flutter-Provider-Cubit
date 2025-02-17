@@ -8,38 +8,38 @@ environment:
   sdk: ^3.6.1
 
 dependencies:
-  bloc: ^9.0.0
-  chewie: ^1.10.0
-  cupertino_icons: ^1.0.8
-  dartz: ^0.10.1
-  equatable: ^2.0.7
-  file_picker: ^8.3.5
+  bloc: ^9.0.0  # State management library using the BLoC pattern.
+  chewie: ^1.10.0  # A video player for Flutter that wraps `video_player` with additional controls.
+  cupertino_icons: ^1.0.8  # Provides Cupertino-style icons for iOS design.
+  dartz: ^0.10.1  # Functional programming utilities for Dart.
+  equatable: ^2.0.7  # Helps in value comparison for objects (useful for BLoC states).
+  file_picker: ^8.3.5  # Enables file selection from the device storage.
   flutter:
-    sdk: flutter
-  flutter_bloc: ^9.0.0
-  font_awesome_flutter: ^10.8.0
-  get_it: ^8.0.3
-  iconly: ^1.0.1
-  image_picker: ^1.1.2
-  intl: ^0.20.2
-  lottie: ^3.0.0
-  open_file: ^3.5.10
-  path_provider: ^2.1.5
-  provider: ^6.1.2
-  shared_preferences: ^2.5.2
-  smooth_page_indicator: ^1.2.0+3
-  swipe_to: ^1.0.6
-  url_launcher: ^6.3.1
-  video_thumbnail: ^0.5.3
-  youtube_metadata: ^1.0.1
+    sdk: flutter  # Core Flutter SDK.
+  flutter_bloc: ^9.0.0  # Integration of Flutter with BLoC for state management.
+  font_awesome_flutter: ^10.8.0  # A library for FontAwesome icons.
+  get_it: ^8.0.3  # A service locator for dependency injection.
+  iconly: ^1.0.1  # A minimalistic icon pack.
+  image_picker: ^1.1.2  # Allows picking images from the gallery or camera.
+  intl: ^0.20.2  # Internationalization and date formatting utilities.
+  lottie: ^3.0.0  # Library for displaying Lottie animations.
+  open_file: ^3.5.10  # Opens files with their default system applications.
+  path_provider: ^2.1.5  # Helps retrieve commonly used paths (e.g., app directory).
+  provider: ^6.1.2  # State management library using the Provider pattern.
+  shared_preferences: ^2.5.2  # Stores simple key-value pairs locally.
+  smooth_page_indicator: ^1.2.0+3  # Customizable page indicators.
+  swipe_to: ^1.0.6  # Adds swipe-to-dismiss gestures.
+  url_launcher: ^6.3.1  # Opens URLs in an external browser or app.
+  video_thumbnail: ^0.5.3  # Extracts thumbnails from video files.
+  youtube_metadata: ^1.0.1  # Retrieves metadata from YouTube videos.
 
 dev_dependencies:
-  bloc_test: ^10.0.0
-  flutter_lints: ^5.0.0
+  bloc_test: ^10.0.0  # Testing utilities for BLoC.
+  flutter_lints: ^5.0.0  # Recommended linting rules for Flutter.
   flutter_test:
-    sdk: flutter
-  mocktail: ^1.0.4
-  very_good_analysis: ^7.0.0
+    sdk: flutter  # Built-in Flutter testing framework.
+  mocktail: ^1.0.4  # A mocking library for testing.
+  very_good_analysis: ^7.0.0  # Strict linting rules for maintaining clean code.
 
 flutter:
   uses-material-design: true
@@ -54,36 +54,35 @@ flutter:
     - family: Aeonik
       fonts:
         - asset: assets/fonts/aeonik/AeonikTRIAL-Bold.otf
-          weight: 700
+          weight: 700  # Bold font weight.
         - asset: assets/fonts/aeonik/AeonikTRIAL-BoldItalic.otf
           style: italic
           weight: 700
         - asset: assets/fonts/aeonik/AeonikTRIAL-Light.otf
-          weight: 300
+          weight: 300  # Light font weight.
         - asset: assets/fonts/aeonik/AeonikTRIAL-LightItalic.otf
           style: italic
           weight: 300
         - asset: assets/fonts/aeonik/AeonikTRIAL-Regular.otf
-          weight: 400
+          weight: 400  # Regular font weight.
         - asset: assets/fonts/aeonik/AeonikTRIAL-RegularItalic.otf
           style: italic
           weight: 400
     - family: Poppins
       fonts:
         - asset: assets/fonts/poppins/Poppins-Thin.ttf
-          weight: 100
+          weight: 100  # Extra thin font.
         - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
-          weight: 200
+          weight: 200  # Extra light font.
         - asset: assets/fonts/poppins/Poppins-Light.ttf
-          weight: 300
+          weight: 300  # Light font.
         - asset: assets/fonts/poppins/Poppins-Regular.ttf
-          weight: 400
+          weight: 400  # Regular font.
         - asset: assets/fonts/poppins/Poppins-Medium.ttf
-          weight: 500
+          weight: 500  # Medium font.
         - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
-          weight: 600
+          weight: 600  # Semi-bold font.
         - asset: assets/fonts/poppins/Poppins-Bold.ttf
-          weight: 700
+          weight: 700  # Bold font.
         - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
-          weight: 800
-
+          weight: 800  # Extra-bold font.
