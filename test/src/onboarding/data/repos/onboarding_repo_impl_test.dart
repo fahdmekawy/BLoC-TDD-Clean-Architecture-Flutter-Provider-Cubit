@@ -62,4 +62,43 @@ void main() {
       },
     );
   });
+
+  group('checkIfUserFirstTime', () {
+    test(
+      'should return true when the user is first time',
+      () async {
+        // Arrange
+        when(() => localDataSource.checkIfUserFirstTime())
+            .thenAnswer((_) async => Future.value(true));
+
+        // Act
+        final result = await repoImpl.checkIfUserFirstTime();
+
+        // Assert
+        expect(result, equals(const Right<dynamic, bool>(true)));
+        verify(() => localDataSource.checkIfUserFirstTime()).called(1);
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'should return false when the user is not first time',
+      () async {
+        // Arrange
+        when(() => localDataSource.checkIfUserFirstTime())
+            .thenAnswer((_) async => Future.value(false));
+        // Act
+        final result = await repoImpl.checkIfUserFirstTime();
+        // Assert
+        expect(
+          result,
+          equals(
+            const Right<dynamic, bool>(false),
+          ),
+        );
+        verify(() => localDataSource.checkIfUserFirstTime()).called(1);
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+  });
 }

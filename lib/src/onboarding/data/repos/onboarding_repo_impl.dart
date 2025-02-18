@@ -21,7 +21,12 @@ class OnboardingRepoImpl implements OnboardingRepo {
   }
 
   @override
-  ResultFuture<bool> checkIfUserFirstTime() {
-    throw UnimplementedError();
+  ResultFuture<bool> checkIfUserFirstTime() async {
+    try {
+      final result = await _localDataSource.checkIfUserFirstTime();
+      return Right(result);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
+    }
   }
 }
