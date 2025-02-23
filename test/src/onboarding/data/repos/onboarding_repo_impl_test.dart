@@ -1,104 +1,122 @@
 import 'package:dartz/dartz.dart';
 import 'package:education_app_tutorial/core/errors/exceptions.dart';
+import 'package:education_app_tutorial/core/errors/failures.dart';
 import 'package:education_app_tutorial/src/onboarding/data/datasources/onboarding_local_datasource.dart';
 import 'package:education_app_tutorial/src/onboarding/data/repos/onboarding_repo_impl.dart';
-import 'package:education_app_tutorial/src/onboarding/domain/repos/onboarding_repo.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockOnboardingLocalDataSrc extends Mock
+class MockOnboardingLocalDataSource extends Mock
     implements OnboardingLocalDataSource {}
 
 void main() {
   late OnboardingLocalDataSource localDataSource;
   late OnboardingRepoImpl repoImpl;
 
-  setUp(() {
-    localDataSource = MockOnboardingLocalDataSrc();
-    repoImpl = OnboardingRepoImpl(localDataSource);
-  });
+  setUp(
+    () => {
+      localDataSource = MockOnboardingLocalDataSource(),
+      repoImpl = OnboardingRepoImpl(localDataSource),
+    },
+  );
 
   test('should be a subclass of [OnboardingRepo]', () {
-    expect(repoImpl, isA<OnboardingRepo>());
+    expect(repoImpl, isA<OnboardingRepoImpl>());
   });
 
-  group('cacheFirstTime', () {
+  group('cacheFirstTimer', () {
     test(
-      'should complete successfully when call to local source is successful',
-      () async {
-        // Arrange
-        when(() => localDataSource.cacheFirstTime())
-            .thenAnswer((_) async => Future.value());
+        'should complete successfully when call to '
+        'localDataSource is successful', () async {
+      // arrange
+      when(() => localDataSource.cacheFirstTime()).thenAnswer(
+        (_) async => Future.value(),
+      );
 
-        // Act
-        final result = await repoImpl.cacheFirstTime();
+      // act
+      final result = await repoImpl.cacheFirstTime();
 
-        // Assert
-        expect(result, equals(const Right<dynamic, void>(null)));
-        verify(() => localDataSource.cacheFirstTime()).called(1);
-        verifyNoMoreInteractions(localDataSource);
-      },
-    );
+      // assert
+      expect(result, equals(const Right<dynamic, void>(null)));
+      verify(() => localDataSource.cacheFirstTime()).called(1);
+      verifyNoMoreInteractions(localDataSource);
+    });
 
-    test(
-      'should return [CacheFailure] when call to local source is unsuccessful',
-      () async {
-        // Arrange
-        when(() => localDataSource.cacheFirstTime()).thenAnswer(
-            (_) async => const CacheException(message: 'Insufficient storage'));
-        // Act
-        final result = await repoImpl.cacheFirstTime();
-        // Assert
-        expect(
-          result,
-          equals(
-            const Left<CacheException, dynamic>(
-              CacheException(message: 'Insufficient storage'),
-            ),
+    test('should return [CacheFailure] when call to localDataSource failed',
+        () async {
+      // arrange
+      when(() => localDataSource.cacheFirstTime()).thenThrow(
+        const CacheException(message: 'Insufficient Storage'),
+      );
+
+      // act
+      final result = await repoImpl.cacheFirstTime();
+
+      // assert
+      expect(
+        result,
+        equals(
+          Left<CacheFailure, dynamic>(
+            CacheFailure(message: 'Insufficient Storage', statusCode: 500),
           ),
-        );
-        verify(() => localDataSource.cacheFirstTime()).called(1);
-        verifyNoMoreInteractions(localDataSource);
-      },
-    );
+        ),
+      );
+      verify(() => localDataSource.cacheFirstTime()).called(1);
+      verifyNoMoreInteractions(localDataSource);
+    });
   });
 
-  group('checkIfUserFirstTime', () {
-    test(
-      'should return true when the user is first time',
-      () async {
-        // Arrange
-        when(() => localDataSource.checkIfUserFirstTime())
-            .thenAnswer((_) async => Future.value(true));
+  group('checkIfUserIsFirstTimer', () {
+    test('should return true when user is first timer', () async {
+      // arrange
+      when(() => localDataSource.checkIfUserFirstTime())
+          .thenAnswer((_) async => Future.value(true));
 
-        // Act
-        final result = await repoImpl.checkIfUserFirstTime();
+      // act
+      final result = await repoImpl.checkIfUserFirstTime();
 
-        // Assert
-        expect(result, equals(const Right<dynamic, bool>(true)));
-        verify(() => localDataSource.checkIfUserFirstTime()).called(1);
-        verifyNoMoreInteractions(localDataSource);
-      },
-    );
+      // assert
+      expect(result, equals(const Right<dynamic, bool>(true)));
+      verify(() => localDataSource.checkIfUserFirstTime()).called(1);
+      verifyNoMoreInteractions(localDataSource);
+    });
 
-    test(
-      'should return false when the user is not first time',
-      () async {
-        // Arrange
-        when(() => localDataSource.checkIfUserFirstTime())
-            .thenAnswer((_) async => Future.value(false));
-        // Act
-        final result = await repoImpl.checkIfUserFirstTime();
-        // Assert
-        expect(
-          result,
-          equals(
-            const Right<dynamic, bool>(false),
+    test('should return false if user is NOT a first timer', () async {
+      // arrange
+      when(() => localDataSource.checkIfUserFirstTime())
+          .thenAnswer((_) async => Future.value(false));
+
+      // act
+      final result = await repoImpl.checkIfUserFirstTime();
+
+      // assert
+      expect(result, equals(const Right<dynamic, bool>(false)));
+      verify(() => localDataSource.checkIfUserFirstTime()).called(1);
+      verifyNoMoreInteractions(localDataSource);
+    });
+
+    test('should return [CacheFailure] when call to localDataSource failed',
+        () async {
+      // arrange
+      when(() => localDataSource.checkIfUserFirstTime()).thenThrow(
+        const CacheException(message: 'Insufficient Storage'),
+      );
+
+      // act
+      final result = await repoImpl.checkIfUserFirstTime();
+
+      // assert
+      expect(
+        result,
+        equals(
+          Left<CacheFailure, dynamic>(
+            CacheFailure(message: 'Insufficient Storage', statusCode: 500),
           ),
-        );
-        verify(() => localDataSource.checkIfUserFirstTime()).called(1);
-        verifyNoMoreInteractions(localDataSource);
-      },
-    );
+        ),
+      );
+      verify(() => localDataSource.checkIfUserFirstTime()).called(1);
+      verifyNoMoreInteractions(localDataSource);
+    });
   });
 }

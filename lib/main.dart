@@ -1,11 +1,16 @@
-import 'package:education_app_tutorial/core/theme/colors.dart';
 import 'package:education_app_tutorial/core/res/fonts.dart';
 import 'package:education_app_tutorial/core/services/di_container.dart';
 import 'package:education_app_tutorial/core/services/router.dart';
+import 'package:education_app_tutorial/core/theme/colors.dart';
+import 'package:education_app_tutorial/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await init();
   runApp(const MyApp());
 }
